@@ -28,7 +28,6 @@ public class CollectionTestSuite {
         }else {
             System.out.println("Test Failed");
         }
-
     }
     @Test
     @DisplayName("Check function on proper List")
@@ -42,7 +41,7 @@ public class CollectionTestSuite {
         for (Integer number : evenOut) {
             if (number % 2 != 0) {
                 System.out.println("test failed");
-                break;
+                System.exit(0);
             }
         }
         System.out.println("Test passed");
