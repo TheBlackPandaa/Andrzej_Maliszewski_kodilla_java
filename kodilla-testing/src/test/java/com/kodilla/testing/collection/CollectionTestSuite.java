@@ -27,15 +27,8 @@ public class CollectionTestSuite {
     @Test
     @DisplayName("Check function on proper List")
     void testOddNumbersExterminatorNormalList(){
-        List<Integer> in = new ArrayList<>();
-        in.add(0);
-        in.add(1);
-        in.add(2);
-        in.add(3);
-        in.add(4);
-        in.add(5);
-        in.add(6);
-        in.add(7);
+        Integer a[] = new Integer[]{0,1,2,3,4,5,6,7};
+        List<Integer> in = Arrays.asList(a);
         List<Integer> out = new ArrayList<>();
         out = OddNumbersExterminator.exterminate(in);
         Assertions.assertEquals(out.size(), 4);
