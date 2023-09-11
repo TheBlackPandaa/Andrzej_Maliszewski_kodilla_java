@@ -20,31 +20,25 @@ public class CollectionTestSuite {
     void testOddNumbersExterminatorEmptyList(){
 
         List<Integer> emptyIn = new ArrayList<>();
-        List<Integer> emptyOut;
+        List<Integer> emptyOut = new ArrayList<>();
         emptyOut = OddNumbersExterminator.exterminate(emptyIn);
-
-        if(emptyOut.isEmpty()){
-            System.out.println("Test passed");
-        }else {
-            System.out.println("Test Failed");
-        }
+        Assertions.assertEquals(emptyIn.size(), 0);
     }
     @Test
     @DisplayName("Check function on proper List")
     void testOddNumbersExterminatorNormalList(){
         List<Integer> in = new ArrayList<>();
-        for(int i=0; i<=10;i++){
-            in.add(i);
-        }
-        List<Integer> evenOut;
-        evenOut = OddNumbersExterminator.exterminate(in);
-        for (Integer number : evenOut) {
-            if (number % 2 != 0) {
-                System.out.println("test failed");
-                System.exit(0);
-            }
-        }
-        System.out.println("Test passed");
+        in.add(0);
+        in.add(1);
+        in.add(2);
+        in.add(3);
+        in.add(4);
+        in.add(5);
+        in.add(6);
+        in.add(7);
+        List<Integer> out = new ArrayList<>();
+        out = OddNumbersExterminator.exterminate(in);
+        Assertions.assertEquals(out.size(), 4);
     }
 
 }
