@@ -6,19 +6,19 @@ import java.util.List;
 
 public class ShapeCollector {
 
-    static List<Shape> shapeCollector = new ArrayList<>();
-    public static void addFigure(Shape shape){
-        shapeCollector.add(shape);
+    List<Shape> shapes = new ArrayList<>();
+    public void addFigure(Shape shape){
+        shapes.add(shape);
     }
-    public static void removeFigure(Shape shape){
-        shapeCollector.remove(shape);
+    public void removeFigure(Shape shape){
+        shapes.remove(shape);
     }
-    public static Shape getFigure(int n){
-        return shapeCollector.get(n);
+    public Shape getFigure(int n){
+        return shapes.get(n);
     }
-    public static String showFigures(){
+    public String showFigures(){
         String result = "" ;
-        for(Shape s :shapeCollector){
+        for(Shape s :shapes){
             result = result + s.getShapeName()+" " + s.getField()+" ";
         }
         System.out.println(result);

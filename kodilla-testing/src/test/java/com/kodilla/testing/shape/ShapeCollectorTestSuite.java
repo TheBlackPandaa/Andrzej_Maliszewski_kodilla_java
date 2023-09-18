@@ -6,9 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ShapeCollectorTestSuite {
 
 
@@ -19,22 +16,25 @@ public class ShapeCollectorTestSuite {
         @Test
         public void getNshape() {
             //given
+            ShapeCollector shapeCollector = new ShapeCollector();
             Shape shape = new Square("Square", 4.51);
-            ShapeCollector.shapeCollector.add(shape);
+            shapeCollector.addFigure(shape);
             //when
-            Shape result = ShapeCollector.getFigure(0);
+            Shape result = shapeCollector.getFigure(shapeCollector.shapes.size()-1);
             //then
             assertEquals(shape, result);
+            shapeCollector.removeFigure(shape);
         }
 
         @DisplayName("show Figures")
         @Test
         public void showFigures() {
             //given
+            ShapeCollector shapeCollector = new ShapeCollector();
             Shape shape = new Triangle("triangle", 3.76);
-            ShapeCollector.shapeCollector.add(shape);
+            shapeCollector.addFigure(shape);
             //when
-            String s = ShapeCollector.showFigures();
+            String s = shapeCollector.showFigures();
             //Then
             assertEquals("triangle 3.76 ", s);
         }
@@ -47,11 +47,12 @@ public class ShapeCollectorTestSuite {
             @Test
             public void removeShapeTest() {
                 //given
+                ShapeCollector shapeCollector = new ShapeCollector();
                 Shape shape = new Circle("Circle", 5.23);
                 //when
-                ShapeCollector.removeFigure(shape);
+                shapeCollector.removeFigure(shape);
                 //then
-                assertEquals(ShapeCollector.shapeCollector.size(), 0);
+                assertEquals(shapeCollector.shapes.size(), 0);
             }
 
 
@@ -59,11 +60,12 @@ public class ShapeCollectorTestSuite {
         @Test
         public void addShapeTest() {
             //given
+            ShapeCollector shapeCollector = new ShapeCollector();
             Shape shape = new Circle("Circle", 5.23);
             //when
-            ShapeCollector.addFigure(shape);
+            shapeCollector.addFigure(shape);
             //then
-            assertEquals(ShapeCollector.shapeCollector.size(), 1);
+            assertEquals(shapeCollector.shapes.size(), 1);
             }
         }
     }
