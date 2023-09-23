@@ -20,14 +20,13 @@ public class ShapeCollectorTestSuite {
             Shape shape = new Square("Square", 4.51);
             shapeCollector.addFigure(shape);
             //when
-            Shape result = shapeCollector.getFigure(shapeCollector.shapes.size()-1);
+            Shape result = shapeCollector.getFigure(shapeCollector.getShapes().size()-1);
             //then
             assertEquals(shape, result);
             shapeCollector.removeFigure(shape);
         }
 
         @DisplayName("show Figures")
-        @Test
         public void showFigures() {
             //given
             ShapeCollector shapeCollector = new ShapeCollector();
@@ -52,7 +51,7 @@ public class ShapeCollectorTestSuite {
                 //when
                 shapeCollector.removeFigure(shape);
                 //then
-                assertEquals(shapeCollector.shapes.size(), 0);
+                assertEquals(shapeCollector.getShapes().size(), 0);
             }
 
 
@@ -65,7 +64,7 @@ public class ShapeCollectorTestSuite {
             //when
             shapeCollector.addFigure(shape);
             //then
-            assertEquals(shapeCollector.shapes.size(), 1);
+            assertEquals(shapeCollector.getShapes().size(), 1);
             }
         }
     }
