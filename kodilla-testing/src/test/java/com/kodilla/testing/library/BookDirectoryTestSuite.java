@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -19,8 +18,9 @@ class BookDirectoryTestSuite {
     @Mock
     private LibraryDatabase libraryDatabaseMock;
 
-    @Test
-    void testListBooksWithConditionsReturnList() {
+    @Test                                                                               // [1]
+    void testListBooksWithConditionsReturnList() {                                      // [2]
+
         // Given
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         List<Book> resultListOfBooks = new ArrayList<>();
@@ -87,7 +87,34 @@ class BookDirectoryTestSuite {
     @Test
     void testlistBooksInHandsOf(){
         //Given
-
-
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        LibraryUser user1 = new LibraryUser("firstname1","lastname1","peselId1");
+        LibraryUser user2 = new LibraryUser("firstname2","lastname2","peselId2");
+        LibraryUser user3 = new LibraryUser("firstname3","lastname3","peselId3");
+        List<Book> booksInHandsOfUser1 = new ArrayList<>();
+        List<Book> booksInHandsOfUser2 = new ArrayList<>();
+        List<Book> booksInHandsOfUser3 = new ArrayList<>();
+        Book book1 = new Book("Secrets of Alamo", "John Smith", 2008);
+        Book book2 = new Book("Secretaries and Directors", "Dilbert Michigan", 2012);
+        Book book3 = new Book("Secret life of programmers", "Steve Wolkowitz", 2016);
+        Book book4 = new Book("Secrets of Java", "Ian Tenewitch", 2010);
+        Book book5 = new Book("How to build a car1","Adrian Newey",2017);
+        booksInHandsOfUser1.add(book1);
+        booksInHandsOfUser1.add(book2);
+        booksInHandsOfUser1.add(book3);
+        booksInHandsOfUser1.add(book4);
+        booksInHandsOfUser1.add(book5);
+        booksInHandsOfUser3.add(book1);
+        when(libraryDatabaseMock.listBooksInHandsOf(user1)).thenReturn(booksInHandsOfUser1);
+        when(libraryDatabaseMock.listBooksInHandsOf(user2)).thenReturn(booksInHandsOfUser2);
+        when(libraryDatabaseMock.listBooksInHandsOf(user3)).thenReturn(booksInHandsOfUser3);
+        //When
+        List<Book> resultBooksOfUser1 = bookLibrary.listBooksInHandsOf(user1);
+        List<Book> resultBooksOfUser2 = bookLibrary.listBooksInHandsOf(user2);
+        List<Book> resultBooksOfUser3 = bookLibrary.listBooksInHandsOf(user3);
+        //Then
+        assertEquals(5,resultBooksOfUser1.size());
+        assertEquals(0,resultBooksOfUser2.size());
+        assertEquals(1,resultBooksOfUser3.size());
     }
 }
