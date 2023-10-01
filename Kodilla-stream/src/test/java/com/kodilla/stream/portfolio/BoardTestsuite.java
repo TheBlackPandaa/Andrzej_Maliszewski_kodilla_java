@@ -146,15 +146,16 @@ class BoardTestSuite{
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-        List<Integer> averageSet = project.getTaskLists().stream()
+        Double average = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .map(t -> LocalDate.now().compareTo(t.getCreated()))
-                .collect(Collectors.toList());
+                .mapToInt(t -> LocalDate.now().compareTo(t.getCreated()))
+                .average()
+                .orElse(0);
 
-        Double average = IntStream.range(0,averageSet.size())
+        /*Double average = IntStream.range(0,averageSet.size())
                 .map(i -> i = averageSet.get(i))
-                .average().getAsDouble();
+                .average().getAsDouble();*/
         //Then
         assertEquals(10,average);
 

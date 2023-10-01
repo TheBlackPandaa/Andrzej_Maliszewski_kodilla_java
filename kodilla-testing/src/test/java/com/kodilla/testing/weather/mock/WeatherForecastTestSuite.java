@@ -33,7 +33,6 @@ class WeatherForecastTestSuite {
         temperaturesMap.put("Gdansk",26.1);
 
     when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
-
     }
 
     @Test
