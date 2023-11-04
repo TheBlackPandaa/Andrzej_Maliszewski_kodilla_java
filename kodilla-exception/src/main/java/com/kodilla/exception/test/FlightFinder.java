@@ -12,10 +12,10 @@ public class FlightFinder {
         flights.put("Wroclaw",true);
         flights.put("Krakow",false);
 
-        if(flights.containsKey(flight.getDepartureAirport()) && flights.containsKey(flight.getArrivalAirport())){
-            return flights.get(flight.getArrivalAirport());
-        }else{
+        if(flights.get(flight.getArrivalAirport()) == null || flights.get(flight.getDepartureAirport()) == null){
             throw new RouteNotFoundException();
+        }else{
+            return flights.get(flight.getArrivalAirport());
         }
     }
 }
