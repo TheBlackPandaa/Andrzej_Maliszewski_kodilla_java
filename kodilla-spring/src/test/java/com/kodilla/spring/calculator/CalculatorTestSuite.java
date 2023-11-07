@@ -3,6 +3,7 @@ package com.kodilla.spring.calculator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class CalculatorTestSuite {
@@ -13,11 +14,14 @@ public class CalculatorTestSuite {
     public void testCalculations(){
         //Given
         //When
-        calculator.add(3,7);
-        calculator.sub(7,3);
-        calculator.mul(2,5);
-        calculator.div(8,4);
+        double add = calculator.add(3,7);
+        double sub = calculator.sub(7,3);
+        double mul = calculator.mul(2,5);
+        double div = calculator.div(8,4);
         //Then
-        //Do nothing
+        assertEquals(10,add);
+        assertEquals(4,sub);
+        assertEquals(10,mul);
+        assertEquals(2,div);
     }
 }
