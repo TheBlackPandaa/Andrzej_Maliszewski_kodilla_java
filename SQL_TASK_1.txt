@@ -1,0 +1,40 @@
+CREATE TABLE ISSUESLISTS
+(
+    ID SERIAL PRIMARY KEY,
+    NAME VARCHAR(100)
+);
+
+INSERT INTO ISSUESLISTS (NAME)
+VALUES
+('ToDo'),
+('In progress'),
+('Done');
+
+CREATE TABLE ISSUES
+(
+    ID SERIAL PRIMARY KEY,
+    ISSUESLIST_ID BIGINT UNSIGNED NOT NULL,
+    SUMMARY VARCHAR(100),
+    DESCRIPTION VARCHAR(255),
+    USER_ID_ASSIGNEDTO BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY (ISSUESLIST_ID) REFERENCES ISSUESLISTS(ID),
+    FOREIGN KEY (USER_ID_ASSIGNEDTO) REFERENCES USERS (ID)
+);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+values
+    (1,'toDo1','taskToBeDone1',1),
+    (1,'toDo2','taskToBeDone2',2),
+    (1,'toDo3','taskToBeDone3',3),
+    (1,'toDo4','taskToBeDone4',4),
+    (1,'toDo5','taskToBeDone5',5),
+    (2, 'in progress1', 'task is in progress1', 1),
+    (2, 'in progress2', 'task is in progress2', 2),
+    (2, 'in progress3', 'task is in progress3', 3),
+    (2, 'in progress4', 'task is in progress4', 4),
+    (2, 'in progress5', 'task is in progress5', 5),
+    (3, 'Done1', 'Task is done1', 1),
+    (3, 'Done2', 'Task is done1', 2),
+    (3, 'Done3', 'Task is done1', 3),
+    (3, 'Done4', 'Task is done1', 4),
+    (3, 'Done5', 'Task is done1', 5);
