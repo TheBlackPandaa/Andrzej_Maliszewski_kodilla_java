@@ -6,13 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany(){
@@ -59,5 +65,53 @@ public class CompanyDaoTestSuite {
             //do nothing
         }
     }
+    @Test
+    void testCompanyStartingWithSpecifiedThreeLetters(){
+        //Given
+        Company company = new Company("company");
+        Company company1 = new Company("asdfas");
+        Company company2 = new Company("asdfga");
 
+        companyDao.save(company);
+        int id = company.getId();
+        companyDao.save(company1);
+        int id1 = company1.getId();
+        companyDao.save(company2);
+        int id2 = company2.getId();
+        //When
+        List<Company> companies = companyDao.retrieveCompaniesWithThreeFirstLetters();
+        //Then
+        try{
+            assertEquals(1, companies.size());
+        }finally {
+            //Cleanup
+            companyDao.deleteById(id);
+            companyDao.deleteById(id1);
+            companyDao.deleteById(id2);
+        }
+
+
+    }
+    @Test
+    void testEmployeeWithTargetLastName(){
+        //Given
+        Employee employee = new Employee("John","Novak");
+        Employee employee1= new Employee("Adrian", "Newey");
+        Employee employee2= new Employee("Christian", "Horner");
+
+        employeeDao.save(employee);
+        int id = employee.getId();
+        employeeDao.save(employee1);
+        int id1= employee1.getId();
+        employeeDao.save(employee2);
+        int id2= employee2.getId();
+        //When
+        List<Employee> employees = employeeDao.retrieveEmployeeWithLastname("Horner");
+        //then
+        assertEquals(1, employees.size());
+        //Cleanup
+        employeeDao.deleteById(id);
+        employeeDao.deleteById(id1);
+        employeeDao.deleteById(id2);
+    }
 }
