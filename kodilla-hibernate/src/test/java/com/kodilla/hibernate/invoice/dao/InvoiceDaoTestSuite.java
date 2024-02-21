@@ -23,6 +23,8 @@ public class InvoiceDaoTestSuite {
         //Given
         Product product1 = new Product("product1");
         Product product2 = new Product("product2");
+        productDao.save(product1);
+        productDao.save(product2);
 
         Item item1 = new Item(new BigDecimal(100),4,new BigDecimal(400));
         Item item2 = new Item(new BigDecimal(50),10,new BigDecimal(500));
@@ -30,9 +32,13 @@ public class InvoiceDaoTestSuite {
 
         Invoice invoice = new Invoice("12345");
 
-        product1.getItems().add(item1);
-        product2.getItems().add(item2);
-        product2.getItems().add(item3);
+        item1.setProduct(product1);
+        item2.setProduct(product2);
+        item3.setProduct(product2);
+
+        item1.setInvoice(invoice);
+        item2.setInvoice(invoice);
+        item3.setInvoice(invoice);
 
         invoice.getItems().add(item1);
         invoice.getItems().add(item2);

@@ -1,16 +1,17 @@
 package com.kodilla.food2door.challenge;
 
-public class ProducerFactory {
+public final class ProducerFactory {
 
-    final private String EXTRAFOODSHOP = "EXTRAFOODSHOP";
-    final private String GLUTENFREESHOP = "GLUTENFREESHOP";
-    final private String HEALTHYSHOP = "HEALTHYSHOP";
+    public static final String EXTRAFOODSHOP = "EXTRAFOODSHOP";
+    public static final String HEALTHYSHOP = "HEALTHYSHOP";
+    public static final String GLUTENFREESHOP = "GLUTENFREESHOP";
 
-    public Producer makeProducer(final String producer){
-        return switch (producer.toUpperCase()){
-            case EXTRAFOODSHOP -> new ExtraFoodShop();
-            case GLUTENFREESHOP -> new GlutenFreeShop();
-            case HEALTHYSHOP -> new HealthyShop();
+    public final Producer makeProducer(FoodOrderRequest foodOrderRequest){
+        String producerClass = foodOrderRequest.getCompanyName();
+        return switch (producerClass.toUpperCase()){
+            case EXTRAFOODSHOP -> new ExtraFoodShop(foodOrderRequest);
+            case HEALTHYSHOP -> new HealthyShop(foodOrderRequest);
+            case GLUTENFREESHOP -> new GlutenFreeShop(foodOrderRequest);
             default -> null;
         };
     }
