@@ -9,6 +9,10 @@ import java.util.List;
         query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE 'com%' ",
         resultClass = Company.class
 )
+@NamedQuery(
+        name = "Company.retrieveCompanyWithRegex",
+        query = "FROM Company WHERE name LIKE :COMPANY_NAME "
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
