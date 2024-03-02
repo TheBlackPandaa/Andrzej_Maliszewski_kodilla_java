@@ -11,7 +11,7 @@ import java.util.List;
 )
 @NamedQuery(
         name = "Company.retrieveCompanyWithRegex",
-        query = "FROM Company WHERE name LIKE :COMPANY_NAME "
+        query = "FROM Company WHERE name LIKE '%'+ :ARG + '%'"
 )
 @Entity
 @Table(name = "COMPANIES")
