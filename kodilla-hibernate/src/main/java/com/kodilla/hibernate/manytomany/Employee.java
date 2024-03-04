@@ -11,7 +11,7 @@ import java.util.List;
         ),
         @NamedQuery(
                 name = "Employee.retrieveEmployeeWithRegex",
-                query = "FROM Employee WHERE lastname like :ARG"
+                query = "FROM Employee WHERE lastname like '%' + :ARG + '%'"
         )
 })
 @Entity
