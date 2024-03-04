@@ -10,8 +10,8 @@ import java.util.List;
         resultClass = Company.class
 )
 @NamedQuery(
-        name = "Company.retrieveCompanyWithRegex",
-        query = "FROM Company WHERE name LIKE '%'+ :ARG + '%'"
+        name = "Company.retrieveCompaniesWithRegex",
+        query = "FROM Company WHERE name LIKE :COMPANYNAME"
 )
 @Entity
 @Table(name = "COMPANIES")

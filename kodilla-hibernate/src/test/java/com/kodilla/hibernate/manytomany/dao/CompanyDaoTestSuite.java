@@ -4,7 +4,6 @@ import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
 import com.kodilla.hibernate.manytomany.facade.MtmFacade;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -94,8 +93,6 @@ public class CompanyDaoTestSuite {
             companyDao.deleteById(id1);
             companyDao.deleteById(id2);
         }
-
-
     }
     @Test
     void testEmployeeWithTargetLastName(){
@@ -128,18 +125,30 @@ public class CompanyDaoTestSuite {
         Employee employee2 = new Employee("name3", "ghijkl");
 
         employeeDao.save(employee);
-        int id = employee.getId();
         employeeDao.save(employee1);
-        int id1 = employee1.getId();
         employeeDao.save(employee2);
-        int id2 = employee2.getId();
         //When
-        List<Employee> employees = mtmFacade.retrieveEmployeesWithRegex("def");
+        List<Employee> employees = mtmFacade.retrieveEmployeesWithRegex('%'+"def"+'%');
         //Then
         assertEquals(2,employees.size());
         //Cleanup
-        employeeDao.deleteById(id);
-        employeeDao.deleteById(id1);
-        employeeDao.deleteById(id2);
+        employeeDao.deleteAll();
+    }
+    @Test
+    void testCompaniesWithRegex(){
+        //Given
+        Company company = new Company("abcdef");
+        Company company1 = new Company("defghi");
+        Company company2 = new Company("ghijkl");
+
+        companyDao.save(company);
+        companyDao.save(company1);
+        companyDao.save(company2);
+        //When
+        List<Company> companies = mtmFacade.retrieveCompaniesWithRegex('%'+"ghi"+'%');
+        //Then
+        assertEquals(2,companies.size());
+        //Cleanup
+        companyDao.deleteAll();
     }
 }

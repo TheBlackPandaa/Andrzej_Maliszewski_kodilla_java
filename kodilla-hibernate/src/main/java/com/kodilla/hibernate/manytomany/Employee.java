@@ -10,8 +10,8 @@ import java.util.List;
                 query = "FROM Employee WHERE lastname = :LASTNAME"
         ),
         @NamedQuery(
-                name = "Employee.retrieveEmployeeWithRegex",
-                query = "FROM Employee WHERE lastname like '%' + :ARG + '%'"
+                name = "Employee.retrieveEmployeesWithRegex",
+                query = "FROM Employee WHERE lastname like :LASTNAME "
         )
 })
 @Entity
