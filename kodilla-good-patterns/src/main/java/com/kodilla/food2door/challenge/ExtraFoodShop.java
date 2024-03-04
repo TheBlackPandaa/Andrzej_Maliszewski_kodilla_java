@@ -1,20 +1,18 @@
 package com.kodilla.food2door.challenge;
 
 public class ExtraFoodShop implements Producer{
+    private String name;
 
-    private String shopName;
-    private String productName;
-    private int productQuant;
-
-    public ExtraFoodShop(FoodOrderRequest foodOrderRequest) {
-        this.shopName = foodOrderRequest.getCompanyName();
-        this.productName = foodOrderRequest.getProductName();
-        this.productQuant = foodOrderRequest.getProductQuant();
+    public ExtraFoodShop() {
+        name = "ExtraFoodShop";
     }
 
     @Override
-    public FoodOrderDTO process(FoodOrderRequest foodOrderRequest) {
-        return null;
+    public void process(String productName, int productAmount) {
+        if(productAmount > 4){
+            System.out.println("Order created for " + productAmount + " " + productName + " by " + name);
+        }else{
+            System.out.println(name + " is selling in quantities more than 4 only");
+        }
     }
 }
-

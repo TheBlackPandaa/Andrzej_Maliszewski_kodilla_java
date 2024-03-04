@@ -1,18 +1,19 @@
 package com.kodilla.food2door.challenge;
 
 public class GlutenFreeShop implements Producer{
-    private String shopName;
-    private String productName;
-    private int productQuant;
+    private String name;
 
-    public GlutenFreeShop(FoodOrderRequest foodOrderRequest) {
-        this.shopName = foodOrderRequest.getCompanyName();
-        this.productName = foodOrderRequest.getProductName();
-        this.productQuant = foodOrderRequest.getProductQuant();
+    public GlutenFreeShop() {
+        this.name = "GlutenFreeShop";
     }
 
     @Override
-    public FoodOrderDTO process(FoodOrderRequest foodOrderRequest) {
-        return null;
+    public void process(String productName, int productAmount) {
+        if(productAmount > 0){
+            System.out.println("With no GLUTEN guarantee you ordered "+productAmount
+            + " " + productName);
+        }else{
+            System.out.println("something went wrong");
+        }
     }
 }
