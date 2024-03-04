@@ -2,7 +2,9 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.hibernate.manytomany.facade.MtmFacade;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,6 +21,9 @@ public class CompanyDaoTestSuite {
 
     @Autowired
     private EmployeeDao employeeDao;
+
+    @Autowired
+    private MtmFacade mtmFacade;
 
     @Test
     void testSaveManyToMany(){
@@ -109,6 +114,29 @@ public class CompanyDaoTestSuite {
         List<Employee> employees = employeeDao.retrieveEmployeeWithLastname("Horner");
         //then
         assertEquals(1, employees.size());
+        //Cleanup
+        employeeDao.deleteById(id);
+        employeeDao.deleteById(id1);
+        employeeDao.deleteById(id2);
+    }
+
+    @Test
+    void testEmployeeWithRegex(){
+        //Given
+        Employee employee = new Employee("name1", "abcdef");
+        Employee employee1 = new Employee("name2", "defghi");
+        Employee employee2 = new Employee("name3", "ghijkl");
+
+        employeeDao.save(employee);
+        int id = employee.getId();
+        employeeDao.save(employee1);
+        int id1 = employee1.getId();
+        employeeDao.save(employee2);
+        int id2 = employee2.getId();
+        //When
+        List<Employee> employees = mtmFacade.retrieveEmployeesWithRegex("def");
+        //Then
+        assertEquals(2,employees.size());
         //Cleanup
         employeeDao.deleteById(id);
         employeeDao.deleteById(id1);
