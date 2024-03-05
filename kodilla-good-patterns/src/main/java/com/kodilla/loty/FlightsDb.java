@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlightsDb {
-    private List flights = new ArrayList();
+    private List<Flight> flights = new ArrayList();
 
     public FlightsDb() {
     }
